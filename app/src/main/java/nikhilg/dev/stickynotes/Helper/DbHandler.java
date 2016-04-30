@@ -82,13 +82,13 @@ public class DbHandler {
         List<NotesObject> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             NotesObject note = new NotesObject();
-            note.setId(cursor.getInt(1));
-            note.setCreatedOn(cursor.getString(2));
-            note.setLastModifiedOn(cursor.getString(3));
-            note.setSmallTitle(cursor.getString(4));
-            note.setTitle(cursor.getString(5));
-            note.setNoteBody(cursor.getString(6));
-            note.setShowIcon(cursor.getInt(7));
+            note.setId(cursor.getInt(0));
+            note.setCreatedOn(cursor.getString(1));
+            note.setLastModifiedOn(cursor.getString(2));
+            note.setSmallTitle(cursor.getString(3));
+            note.setTitle(cursor.getString(4));
+            note.setNoteBody(cursor.getString(5));
+            note.setShowIcon(cursor.getInt(6));
             list.add(note);
         }
         cursor.close();

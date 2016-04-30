@@ -6,13 +6,19 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import nikhilg.dev.stickynotes.Activity.AddNoteActivity;
+import nikhilg.dev.stickynotes.Classes.NotesObject;
+import nikhilg.dev.stickynotes.Helper.NotesDb;
+import nikhilg.dev.stickynotes.Helper.Utils;
 import nikhilg.dev.stickynotes.R;
 
 /**
@@ -22,6 +28,7 @@ public class AllNotesFragment extends Fragment implements View.OnClickListener{
 
     private FloatingActionButton add_note_fab;
     private TextView no_notes_txt;
+    private RecyclerView notes_listview;
 
     public AllNotesFragment() {
         // Required empty public constructor
@@ -37,10 +44,21 @@ public class AllNotesFragment extends Fragment implements View.OnClickListener{
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<NotesObject> all_db_notes = new NotesDb().FetchAllNotes();
+        if (all_db_notes.size() > 0) {
+            no_notes_txt.setVisibility(View.GONE);
+        } else {
+            notes_listview.setVisibility(View.GONE);
+        }
+    }
+
     private void init(View v) {
         add_note_fab = (FloatingActionButton) v.findViewById(R.id.add_note_fab);
         no_notes_txt = (TextView) v.findViewById(R.id.no_notes_txt);
-
+        notes_listview = (RecyclerView) v.findViewById(R.id.notes_list);
         add_note_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
