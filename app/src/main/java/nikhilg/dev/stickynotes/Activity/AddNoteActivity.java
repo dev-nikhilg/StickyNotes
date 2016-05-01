@@ -63,6 +63,7 @@ public class AddNoteActivity extends AppCompatActivity implements View.OnClickLi
 
     private void saveNote() {
         String str = body.getText().toString();
+        str = str.trim();
         if (str != null && str.length() > 0) {
             NotesObject note = new NotesObject();
             if (short_title.getText().toString() != null && short_title.getText().toString().length() > 0) {

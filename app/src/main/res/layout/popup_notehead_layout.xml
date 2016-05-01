@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:paddingBottom="16dp"
+    android:id="@+id/messagesent">
+
+    <TextView
+        android:id="@+id/messagesentheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/textColor"/>
+
+    <TextView
+        android:id="@+id/messagesentdescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messagesentheading"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/textColor"
+        android:fontFamily="sans-serif-light"/>
+
+    <CheckBox
+        android:id="@+id/cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't show again"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:textSize="14sp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/messagesentdescription"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cb"
+        android:layout_marginTop="24dp"
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/btn_positive"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@color/colorPrimary"
+            android:textSize="16dp"
+            android:textColor="@android:color/white"
+            android:fontFamily="sans-serif-light"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
