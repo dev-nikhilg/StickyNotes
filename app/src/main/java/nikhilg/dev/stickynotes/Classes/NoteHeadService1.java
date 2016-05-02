@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import nikhilg.dev.stickynotes.Activity.MainActivity;
+import nikhilg.dev.stickynotes.Helper.Utils;
 import nikhilg.dev.stickynotes.R;
 
 /**
@@ -45,13 +46,15 @@ public class NoteHeadService1 extends Service implements StartActivityFromNoteHe
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        note = new Gson().fromJson(intent.getStringExtra("note_object"), NotesObject.class);
-        initHeadLayer(note);
+        Log.d("nikhilservice", "in noteheadservice1 in onstartcommand");
+        if (intent != null && intent.getStringExtra("note_object") != null) {
+            note = new Gson().fromJson(intent.getStringExtra("note_object"), NotesObject.class);
+            initHeadLayer(note);
 
-        PendingIntent pendingIntent = createPendingIntent();
-        Notification notification = createNotification(pendingIntent);
-        startForeground(FOREGROUND_ID, notification);
-
+            PendingIntent pendingIntent = createPendingIntent();
+            Notification notification = createNotification(pendingIntent);
+            startForeground(FOREGROUND_ID, notification);
+        }
         return START_STICKY;
     }
 
@@ -87,11 +90,12 @@ public class NoteHeadService1 extends Service implements StartActivityFromNoteHe
 
     @Override
     public void startMainActivity() {
-        stopForeground(true);
+        //stopForeground(true);
+        Utils.getInstance(this).addBoolValue("show_one_note", true);
         Intent i = new Intent(this, MainActivity.class);
-        i.putExtra("show_one_note", true);
         i.putExtra("note_id", "" + note.getId());
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
     }
 }

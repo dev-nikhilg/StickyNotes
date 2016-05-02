@@ -1,6 +1,7 @@
 package nikhilg.dev.stickynotes.Activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,11 +28,16 @@ import java.util.List;
 
 import nikhilg.dev.stickynotes.Classes.NotesObject;
 import nikhilg.dev.stickynotes.Fragments.AllNotesFragment;
+import nikhilg.dev.stickynotes.Fragments.OneNoteFragment;
 import nikhilg.dev.stickynotes.Helper.NotesDb;
 import nikhilg.dev.stickynotes.Helper.Utils;
 import nikhilg.dev.stickynotes.R;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Intent intent = null;
+
+    private String active_fragment;
 
     private FrameLayout fragmentContainer;
 
@@ -38,17 +45,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         init();
     }
 
     private void init() {
+        active_fragment = null;
         fragmentContainer = (FrameLayout) findViewById(R.id.fragmentContainer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
     public void setAllNotesFragment() {
+        active_fragment = "all_note";
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentByTag("FRAG");
         if (fragment != null) {
@@ -61,14 +69,38 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void setEditNotFragment() {
+    public void setOneNoteFragment(String id) {
+        active_fragment = "one_note";
+        // Add note id to bundle
+        Bundle bundle = new Bundle();
+        bundle.putString("note_id", id);
+        // Add bundle to fragment instance
+        OneNoteFragment frag = new OneNoteFragment();
+        frag.setArguments(bundle);
 
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentByTag("FRAG");
+        if (fragment != null) {
+            fm.beginTransaction()
+                    .remove(fragment)
+                    .commit();
+        }
+        fm.beginTransaction()
+                .add(R.id.fragmentContainer, frag, "FRAG")
+                .commit();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setAllNotesFragment();
+        intent = getIntent();
+        if (intent != null && Utils.getInstance(this).getBoolValue("show_one_note")) {
+            Utils.getInstance(this).addBoolValue("show_one_note", false);
+            String str_id = intent.getStringExtra("note_id");
+            setOneNoteFragment(str_id);
+        } else {
+            setAllNotesFragment();
+        }
     }
 
     @Override
@@ -154,5 +186,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void stopService(NotesObject note) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if (active_fragment.equalsIgnoreCase("one_note") && Utils.getInstance(this).getIntValue("active_notes") > 1) {
+            Log.d("nikhilservice", "num of active notes is : " + Utils.getInstance(this).getIntValue("active_notes"));
+            setAllNotesFragment();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

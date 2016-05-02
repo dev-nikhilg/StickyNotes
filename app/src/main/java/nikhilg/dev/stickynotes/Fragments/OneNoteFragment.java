@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ import nikhilg.dev.stickynotes.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AllNotesFragment extends Fragment implements View.OnClickListener{
+public class OneNoteFragment extends Fragment implements View.OnClickListener{
 
     private FloatingActionButton add_note_fab;
     private TextView no_notes_txt;
@@ -37,8 +38,11 @@ public class AllNotesFragment extends Fragment implements View.OnClickListener{
     private MyAllNotesViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     List<NotesObject> all_notes;
+    NotesObject single_note;
 
-    public AllNotesFragment() {
+    private int note_id;
+
+    public OneNoteFragment() {
         // Required empty public constructor
     }
 
@@ -55,7 +59,11 @@ public class AllNotesFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onResume() {
         super.onResume();
-        all_notes = new NotesDb().FetchAllNotes();
+        note_id = Integer.parseInt(getArguments().getString("note_id"));
+        Log.d("nikhilservice", "in one frag on resume, note id is : " + note_id);
+        single_note = new NotesDb().FetchNote(note_id);
+        all_notes.clear();
+        all_notes.add(single_note);
         if (all_notes.size() > 0) {
             no_notes_txt.setVisibility(View.GONE);
             mAdapter = new MyAllNotesViewAdapter(all_notes, getActivity());
@@ -180,10 +188,8 @@ public class AllNotesFragment extends Fragment implements View.OnClickListener{
                 holder.checkBox.setChecked(false);
                 if (Utils.getInstance(getActivity()).getIntValue("active_services") < 5) {
                     holder.checkBox.setEnabled(true);
-                    holder.checkBox.setTypeface(type_medium);
                 } else {
                     holder.checkBox.setEnabled(false);
-                    holder.checkBox.setTypeface(type_regular);
                 }
             }
             holder.edit.setTypeface(type_bold);
@@ -193,6 +199,7 @@ public class AllNotesFragment extends Fragment implements View.OnClickListener{
             holder.title.setTypeface(type_bold);
             holder.modified_on.setTypeface(type_regular);
             holder.body.setTypeface(type_regular);
+            holder.checkBox.setTypeface(type_medium);
             holder.checkBox.setTag(position);
         }
 
