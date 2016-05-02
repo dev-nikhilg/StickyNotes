@@ -26,7 +26,7 @@
             android:name=".Activity.AddNoteActivity"
             android:label="@string/title_activity_add_note"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <service android:name=".Classes.NoteHeadService1" />
         <service android:name=".Classes.NoteHeadService2" />
@@ -34,6 +34,11 @@
         <service android:name=".Classes.NoteHeadService4" />
         <service android:name=".Classes.NoteHeadService5" />
         <service android:name=".Classes.NoteHeadServiceFirstNote" />
+
+        <activity
+            android:name=".Activity.EditNote"
+            android:label="@string/title_activity_edit_note"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

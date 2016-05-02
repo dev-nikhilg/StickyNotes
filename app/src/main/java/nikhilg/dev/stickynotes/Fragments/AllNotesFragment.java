@@ -17,9 +17,12 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import nikhilg.dev.stickynotes.Activity.AddNoteActivity;
+import nikhilg.dev.stickynotes.Activity.EditNote;
 import nikhilg.dev.stickynotes.Activity.MainActivity;
 import nikhilg.dev.stickynotes.Classes.NotesObject;
 import nikhilg.dev.stickynotes.Helper.NotesDb;
@@ -130,6 +133,10 @@ public class AllNotesFragment extends Fragment implements View.OnClickListener{
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.btn_edit:
+                        Intent i = new Intent(getActivity(), EditNote.class);
+                        i.putExtra("note_object", new Gson().toJson(mDataset.get((Integer) v.getTag())));
+                        startActivity(i);
+                        getActivity().overridePendingTransition(R.animator.pull_in_right, R.animator.push_out_left);
                         break;
                     case R.id.btn_delete:
                         ((MainActivity) getActivity()).showPopUp("Delete Note?", "Are you sure you want to permanently delete this note. You will not be able to recover it later.",
