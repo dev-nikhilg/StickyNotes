@@ -178,6 +178,11 @@ public class AllNotesFragment extends Fragment implements View.OnClickListener{
                 holder.checkBox.setChecked(true);
             } else {
                 holder.checkBox.setChecked(false);
+                if (Utils.getInstance(getActivity()).getIntValue("active_services") < 5) {
+                    holder.checkBox.setEnabled(true);
+                } else {
+                    holder.checkBox.setEnabled(false);
+                }
             }
             holder.edit.setTypeface(type_bold);
             holder.edit.setTag(position);

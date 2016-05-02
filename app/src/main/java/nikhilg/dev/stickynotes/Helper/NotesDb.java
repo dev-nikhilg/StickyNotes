@@ -9,7 +9,7 @@ import nikhilg.dev.stickynotes.Classes.NotesObject;
  */
 public class NotesDb {
     public void AddToDb(NotesObject note) {
-        DbHandler.AddNoteToDb(note.getId(), note.getCreatedOn(), note.getLastModifiedOn(), note.getSmallTitle(), note.getTitle(), note.getNoteBody(), note.getShowIcon());
+        DbHandler.AddNoteToDb(note.getId(), note.getCreatedOn(), note.getLastModifiedOn(), note.getSmallTitle(), note.getTitle(), note.getNoteBody(), note.getShowIcon(), note.getService_num());
     }
 
     public List<NotesObject> FetchAllNotes() {

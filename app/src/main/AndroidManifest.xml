@@ -3,6 +3,7 @@
     package="nikhilg.dev.stickynotes">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".Classes.MyApplication"
@@ -25,6 +26,13 @@
             android:name=".Activity.AddNoteActivity"
             android:label="@string/title_activity_add_note"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <service android:name=".Classes.NoteHeadService1" />
+        <service android:name=".Classes.NoteHeadService2" />
+        <service android:name=".Classes.NoteHeadService3" />
+        <service android:name=".Classes.NoteHeadService4" />
+        <service android:name=".Classes.NoteHeadService5" />
+        <service android:name=".Classes.NoteHeadServiceFirstNote" />
     </application>
 
 </manifest>

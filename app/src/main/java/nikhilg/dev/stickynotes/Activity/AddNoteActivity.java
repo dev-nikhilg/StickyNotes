@@ -17,8 +17,11 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
+import nikhilg.dev.stickynotes.Classes.GetServicenumber;
 import nikhilg.dev.stickynotes.Classes.NotesObject;
+import nikhilg.dev.stickynotes.Classes.StartNoteHeadService;
 import nikhilg.dev.stickynotes.Helper.NotesDb;
 import nikhilg.dev.stickynotes.Helper.Utils;
 import nikhilg.dev.stickynotes.R;
@@ -89,11 +92,11 @@ public class AddNoteActivity extends AppCompatActivity implements View.OnClickLi
                 note.setTitle(s);
             }
             note.setNoteBody(str);
-            note.setShowIcon(1);
             Calendar c = Calendar.getInstance();
             SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-            String formattedDate = df.format(c.getTime());
-            note.setCreatedOn(formattedDate);
+            Date date = c.getTime();
+            String formattedDate = df.format(date);
+            note.setCreatedOn(date.toString());
             note .setLastModifiedOn(formattedDate);
 
             if (Utils.getInstance(this).getBoolValue("experienced_user")) {
@@ -104,12 +107,26 @@ public class AddNoteActivity extends AppCompatActivity implements View.OnClickLi
                 int num = Utils.getInstance(this).getIntValue("active_notes");
                 num++;
                 Utils.getInstance(this).addIntValue("active_notes", num);
+                Utils.getInstance(this).addBoolValue("firstnote", false);
             } else {
                 note.setId(1);
                 Utils.getInstance(this).addIntValue("all_notes_num", 1);
                 Utils.getInstance(this).addIntValue("active_notes", 1);
                 Utils.getInstance(this).addBoolValue("experienced_user", true);
                 Utils.getInstance(this).addBoolValue("firstnote", true);
+            }
+
+            // Get service number for notehead of this note
+            note.setService_num(new GetServicenumber().getNumber(this));
+            // we have to start service if service_num is not equal to -1
+            if (note.getService_num() == -1) {
+                // not starting service (already 5 services are active)
+                // so set show icon to 0
+                note.setShowIcon(0);
+            } else {
+                // can start service. set show icon to 1
+                note.setShowIcon(1);
+                new StartNoteHeadService(this, note);
             }
             NotesDb db = new NotesDb();
             db.AddToDb(note);

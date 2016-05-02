@@ -11,6 +11,7 @@ public class NotesObject {
     private String title;
     private String noteBody;
     private int showIcon;
+    private int service_num;
 
     public int getId() {
         return id;
@@ -66,5 +67,13 @@ public class NotesObject {
 
     public void setShowIcon(int showIcon) {
         this.showIcon = showIcon;
+    }
+
+    public int getService_num() {
+        return service_num;
+    }
+
+    public void setService_num(int service_num) {
+        this.service_num = service_num;
     }
 }

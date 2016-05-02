@@ -29,6 +29,7 @@ public class DbHandler {
     private static final String N_COL_5 = "title";
     private static final String N_COL_6 = "body";
     private static final String N_COL_7 = "show_icon";
+    private static final String N_COL_8 = "service_num";
 
     private static StickyNoteDbHelper dbInstance;
 
@@ -53,7 +54,7 @@ public class DbHandler {
         }
 
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("create table " + N_TABLE_NAME + " (id INTEGER PRIMARY KEY, created_on TEXT, last_modified_on TEXT, small_title TEXT, title TEXT, body TEXT, show_icon INTEGER)");
+            db.execSQL("create table " + N_TABLE_NAME + " (id INTEGER PRIMARY KEY, created_on TEXT, last_modified_on TEXT, small_title TEXT, title TEXT, body TEXT, show_icon INTEGER, service_num INTEGER)");
         }
 
         @Override
@@ -62,7 +63,7 @@ public class DbHandler {
         }
     }
 
-    public static void AddNoteToDb(int id, String created_on, String updated_on, String small_title, String title, String body, int show_icon) {
+    public static void AddNoteToDb(int id, String created_on, String updated_on, String small_title, String title, String body, int show_icon, int service_num) {
         SQLiteDatabase db = getInstance(MyApplication.context);
         ContentValues contentValues = new ContentValues();
         contentValues.put(N_COL_1, id);
@@ -72,13 +73,13 @@ public class DbHandler {
         contentValues.put(N_COL_5, title);
         contentValues.put(N_COL_6, body);
         contentValues.put(N_COL_7, show_icon);
-
+        contentValues.put(N_COL_8, service_num);
         db.insert(N_TABLE_NAME, null, contentValues);
     }
 
     public static List<NotesObject> FetchAllNotes() {
         SQLiteDatabase db= getInstance(MyApplication.context);
-        Cursor cursor = db.rawQuery("select * from " + N_TABLE_NAME + " order by last_modified_on DESC", null);
+        Cursor cursor = db.rawQuery("select * from " + N_TABLE_NAME + " order by created_on DESC", null);
         List<NotesObject> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             NotesObject note = new NotesObject();
@@ -89,6 +90,7 @@ public class DbHandler {
             note.setTitle(cursor.getString(4));
             note.setNoteBody(cursor.getString(5));
             note.setShowIcon(cursor.getInt(6));
+            note.setService_num(cursor.getInt(7));
             list.add(note);
         }
         cursor.close();
@@ -100,13 +102,14 @@ public class DbHandler {
         Cursor cursor = db.rawQuery("select * from " + N_TABLE_NAME + " where " + N_COL_1 + " = " + id, null);
         NotesObject note = new NotesObject();
         while (cursor.moveToNext()) {
-            note.setId(cursor.getInt(1));
-            note.setCreatedOn(cursor.getString(2));
-            note.setLastModifiedOn(cursor.getString(3));
-            note.setSmallTitle(cursor.getString(4));
-            note.setTitle(cursor.getString(5));
-            note.setNoteBody(cursor.getString(6));
-            note.setShowIcon(cursor.getInt(7));
+            note.setId(cursor.getInt(0));
+            note.setCreatedOn(cursor.getString(1));
+            note.setLastModifiedOn(cursor.getString(2));
+            note.setSmallTitle(cursor.getString(3));
+            note.setTitle(cursor.getString(4));
+            note.setNoteBody(cursor.getString(5));
+            note.setShowIcon(cursor.getInt(6));
+            note.setService_num(cursor.getInt(7));
         }
         cursor.close();
         return note;
