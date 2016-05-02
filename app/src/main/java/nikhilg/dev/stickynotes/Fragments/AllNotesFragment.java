@@ -133,7 +133,7 @@ public class AllNotesFragment extends Fragment implements View.OnClickListener{
                         break;
                     case R.id.btn_delete:
                         ((MainActivity) getActivity()).showPopUp("Delete Note?", "Are you sure you want to permanently delete this note. You will not be able to recover it later.",
-                                "DELETE", "CANCEL", mDataset.get((Integer) v.getTag()).getId());
+                                "DELETE", "CANCEL", mDataset.get((Integer) v.getTag()));
                         break;
                     case R.id.allow_noteheads:
                         CheckBox cbox = (CheckBox) v;

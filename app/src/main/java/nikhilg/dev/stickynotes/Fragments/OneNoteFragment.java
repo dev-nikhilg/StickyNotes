@@ -141,7 +141,7 @@ public class OneNoteFragment extends Fragment implements View.OnClickListener{
                         break;
                     case R.id.btn_delete:
                         ((MainActivity) getActivity()).showPopUp("Delete Note?", "Are you sure you want to permanently delete this note. You will not be able to recover it later.",
-                                "DELETE", "CANCEL", mDataset.get((Integer) v.getTag()).getId());
+                                "DELETE", "CANCEL", mDataset.get((Integer) v.getTag()));
                         break;
                     case R.id.allow_noteheads:
                         CheckBox cbox = (CheckBox) v;
@@ -188,8 +188,10 @@ public class OneNoteFragment extends Fragment implements View.OnClickListener{
                 holder.checkBox.setChecked(false);
                 if (Utils.getInstance(getActivity()).getIntValue("active_services") < 5) {
                     holder.checkBox.setEnabled(true);
+                    holder.checkBox.setTypeface(type_medium);
                 } else {
                     holder.checkBox.setEnabled(false);
+                    holder.checkBox.setTypeface(type_regular);
                 }
             }
             holder.edit.setTypeface(type_bold);
@@ -199,7 +201,6 @@ public class OneNoteFragment extends Fragment implements View.OnClickListener{
             holder.title.setTypeface(type_bold);
             holder.modified_on.setTypeface(type_regular);
             holder.body.setTypeface(type_regular);
-            holder.checkBox.setTypeface(type_medium);
             holder.checkBox.setTag(position);
         }
 

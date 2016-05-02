@@ -32,10 +32,6 @@ public class NoteHeadService1 extends Service implements StartActivityFromNoteHe
     private final static int FOREGROUND_ID = 999;
 
     private HeadLayer mHeadLayer;
-    private FrameLayout mFrameLayout;
-    private WindowManager mWindowManager;
-    private boolean clicked = false;
-    WindowManager.LayoutParams params;
     private NotesObject note;
 
     @Nullable
@@ -61,7 +57,6 @@ public class NoteHeadService1 extends Service implements StartActivityFromNoteHe
     @Override
     public void onDestroy() {
         destroyHeadLayer();
-        mWindowManager.removeView(mFrameLayout);
         stopForeground(true);
     }
 

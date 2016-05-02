@@ -27,6 +27,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import nikhilg.dev.stickynotes.Classes.NotesObject;
+import nikhilg.dev.stickynotes.Classes.StopNoteHeadService;
 import nikhilg.dev.stickynotes.Fragments.AllNotesFragment;
 import nikhilg.dev.stickynotes.Fragments.OneNoteFragment;
 import nikhilg.dev.stickynotes.Helper.NotesDb;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public void showPopUp(String heading_txt, String description_txt, String btn_positive_txt, String btn_negative_txt, final int id) {
+    public void showPopUp(String heading_txt, String description_txt, String btn_positive_txt, String btn_negative_txt, final NotesObject note_obj) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.popup_layout);
@@ -132,7 +133,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                new NotesDb().DeleteNote(id);
+                if (note_obj.getService_num() != -1) {
+                    new StopNoteHeadService( MainActivity.this, note_obj);
+                }
+                new NotesDb().DeleteNote(note_obj.getId());
                 int num = Utils.getInstance(MainActivity.this).getIntValue("active_notes");
                 num--;
                 Utils.getInstance(MainActivity.this).addIntValue("active_notes", num);

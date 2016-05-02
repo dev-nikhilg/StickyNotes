@@ -26,124 +26,132 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/white"
-            android:layout_below="@id/appBar">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="32dp">
-
-                <EditText
-                    android:id="@+id/etxt_short_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter a unique identifier for this note (max 4 characters)"
-                    android:singleLine="true"
-                    android:fontFamily="sans-serif-light"
-                    android:textColorHint="#20000000"
-                    android:maxLength="4"
-                    android:inputType="textNoSuggestions"
-                    android:textSize="14sp"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="(Optional)"
-                android:textColor="#20000000"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif-light"
-                android:layout_marginLeft="16dp"
-                android:layout_marginBottom="16dp"/>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
-
-                <EditText
-                    android:id="@+id/etxt_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter a title for this note"
-                    android:singleLine="true"
-                    android:fontFamily="sans-serif-light"
-                    android:textColorHint="#20000000"
-                    android:maxLength="40"
-                    android:inputType="textNoSuggestions"
-                    android:textSize="14sp"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="(Optional)"
-                android:textColor="#20000000"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif-light"
-                android:layout_marginLeft="16dp"/>
-
-            <EditText
-                android:id="@+id/etxt_body"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:hint="Note Contents"
-                android:fontFamily="sans-serif-light"
-                android:textColorHint="#20000000"
-                android:textSize="14sp"
-                android:background="@drawable/edit_text_bg"
-                android:layout_margin="16dp"
-                android:inputType="textMultiLine|textNoSuggestions"
-                android:gravity="top|left"
-                android:scrollbars="vertical"
-                android:padding="8dp"/>
+            android:layout_below="@id/appBar"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp">
+                android:orientation="vertical"
+                android:background="@color/white">
 
-                <Button
-                    android:id="@+id/btn_save"
-                    android:layout_width="0dp"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Save"
-                    android:textSize="16sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:background="@color/colorPrimary"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="32dp">
 
-                <Button
-                    android:id="@+id/btn_discard"
-                    android:layout_width="0dp"
+                    <EditText
+                        android:id="@+id/etxt_short_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter a unique identifier for this note (max 4 characters)"
+                        android:singleLine="true"
+                        android:fontFamily="sans-serif-light"
+                        android:textColorHint="#20000000"
+                        android:maxLength="4"
+                        android:inputType="textNoSuggestions"
+                        android:textSize="14sp"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="(Optional)"
+                    android:textColor="#20000000"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="16dp"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
+
+                    <EditText
+                        android:id="@+id/etxt_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter a title for this note"
+                        android:singleLine="true"
+                        android:fontFamily="sans-serif-light"
+                        android:textColorHint="#20000000"
+                        android:maxLength="40"
+                        android:inputType="textNoSuggestions"
+                        android:textSize="14sp"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="(Optional)"
+                    android:textColor="#20000000"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_marginLeft="16dp"/>
+
+                <EditText
+                    android:id="@+id/etxt_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:minHeight="200dp"
                     android:layout_weight="1"
-                    android:text="Discard"
-                    android:textSize="16sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:background="@color/colorPrimary"
-                    android:layout_marginLeft="8dp"/>
+                    android:hint="Note Contents"
+                    android:fontFamily="sans-serif-light"
+                    android:textColorHint="#20000000"
+                    android:textSize="14sp"
+                    android:background="@drawable/edit_text_bg"
+                    android:layout_margin="16dp"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:gravity="top|left"
+                    android:scrollbars="vertical"
+                    android:padding="8dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <Button
+                        android:id="@+id/btn_save"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Save"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimary"
+                        android:layout_marginRight="8dp"/>
+
+                    <Button
+                        android:id="@+id/btn_discard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Discard"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimary"
+                        android:layout_marginLeft="8dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
     </RelativeLayout>
 

@@ -32,10 +32,6 @@ public class NoteHeadService2 extends Service implements StartActivityFromNoteHe
     private final static int FOREGROUND_ID = 999;
 
     private HeadLayer mHeadLayer;
-    private FrameLayout mFrameLayout;
-    private WindowManager mWindowManager;
-    private boolean clicked = false;
-    WindowManager.LayoutParams params;
     private NotesObject note;
 
     @Nullable
@@ -46,7 +42,7 @@ public class NoteHeadService2 extends Service implements StartActivityFromNoteHe
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("nikhilservice", "in noteheadservice2 in onstartcommand");
+        Log.d("nikhilservice", "in noteheadservice1 in onstartcommand");
         if (intent != null && intent.getStringExtra("note_object") != null) {
             note = new Gson().fromJson(intent.getStringExtra("note_object"), NotesObject.class);
             initHeadLayer(note);
@@ -61,7 +57,6 @@ public class NoteHeadService2 extends Service implements StartActivityFromNoteHe
     @Override
     public void onDestroy() {
         destroyHeadLayer();
-        mWindowManager.removeView(mFrameLayout);
         stopForeground(true);
     }
 
@@ -90,6 +85,7 @@ public class NoteHeadService2 extends Service implements StartActivityFromNoteHe
 
     @Override
     public void startMainActivity() {
+        //stopForeground(true);
         Utils.getInstance(this).addBoolValue("show_one_note", true);
         Intent i = new Intent(this, MainActivity.class);
         i.putExtra("note_id", "" + note.getId());
