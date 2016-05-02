@@ -21,12 +21,15 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
 
+import nikhilg.dev.stickynotes.Classes.GetServicenumber;
 import nikhilg.dev.stickynotes.Classes.NotesObject;
+import nikhilg.dev.stickynotes.Classes.StartNoteHeadService;
 import nikhilg.dev.stickynotes.Classes.StopNoteHeadService;
 import nikhilg.dev.stickynotes.Fragments.AllNotesFragment;
 import nikhilg.dev.stickynotes.Fragments.OneNoteFragment;
@@ -185,11 +188,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startService(NotesObject note) {
-
+        // Get service number for notehead of this note
+        note.setService_num(new GetServicenumber().getNumber(this));
+        // we have to start service if service_num is not equal to -1
+        if (note.getService_num() == -1) {
+            // not starting service (already 5 services are active)
+            // so set show icon to 0
+            note.setShowIcon(0);
+        } else {
+            // can start service. set show icon to 1
+            note.setShowIcon(1);
+            new StartNoteHeadService(this, note);
+        }
+        NotesDb db = new NotesDb();
+        db.UpdateNote(note);
+        Toast.makeText(this, "NoteHead successfully created.", Toast.LENGTH_SHORT).show();
     }
 
     public void stopService(NotesObject note) {
-
+        if (note.getService_num() != -1) {
+            new StopNoteHeadService(this, note);
+        }
+        note.setService_num(-1);
+        NotesDb db = new NotesDb();
+        db.UpdateNote(note);
+        Toast.makeText(this, "NoteHead successfully removed.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
