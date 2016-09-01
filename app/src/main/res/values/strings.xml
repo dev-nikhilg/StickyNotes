@@ -9,4 +9,6 @@
     <string name="no_saved_notes">You don\'t have any saved notes.\nMake a new note by clicking on the plus icon below.</string>
     <string name="title_activity_add_note">Add Note</string>
     <string name="title_activity_edit_note">Edit Note</string>
+    <string name="continue_with_google_string">Continue with Google</string>
+    <string name="skipText">Skip</string>
 </resources>

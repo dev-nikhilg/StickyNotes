@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_gradient"
+    tools:context="nikhilg.dev.stickynotes.Activity.SplashActivity">
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="StickyNotes"
+        android:textSize="44sp"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="96dp"/>
+    
+    <TextView
+        android:id="@+id/skipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/continueWithGoogleLayout"
+        android:text="@string/skipText"
+        android:textColor="@color/white"
+        android:layout_marginBottom="24dp"
+        android:textSize="14sp"/>
+
+    <LinearLayout
+        android:id="@id/continueWithGoogleLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/g_logo"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/continueWithGoogleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/continue_with_google_string"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="24dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="@color/textColor"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
